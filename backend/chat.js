@@ -1,7 +1,16 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
 
-// const API_KEY = process.env.GeminiAPI;
+// Load environment variables
+// dotenv.config();
+
+// Retrieve API key securely
+const API_KEY = "AIzaSyBfZFLAvLbpe55fIpl9MdKzRdLzpi3z9rI";
+if (!API_KEY) {
+  throw new Error("API key not found. Please set the GeminiAPI environment variable.");
+}
+
+// Initialize Google Generative AI
 const googleAI = new GoogleGenerativeAI(API_KEY);
 
 // Configuration for the model
@@ -12,29 +21,35 @@ const geminiConfig = {
   maxOutputTokens: 4096,
 };
 
+// Get the generative model
 const geminiModel = googleAI.getGenerativeModel({
   model: "gemini-1.5-flash",
-  geminiConfig,
+  ...geminiConfig, // Spread the config into the model configuration
 });
 
+// Chat history
 let chatHistory = [];
 
+// Add a message to the chat history
 const addHistory = (sender, content) => {
   chatHistory.push({ sender, content });
 };
 
+// Generate a response using the generative model
 const generateResponse = async (prompt) => {
   try {
     const result = await geminiModel.generateContent(prompt);
 
-    console.log("Raw API Response:", result); // Debugging
+    // Debugging raw API response
+    console.log("Raw API Response:", result);
 
     // Ensure candidates exist
-    if (result.candidates && result.candidates.length > 0) {
-      const firstCandidate = result.candidates[0];
-      const responseText = firstCandidate?.text || "No text available in response.";
+    if (result?.candidates?.length > 0) {
+      const responseText = result.candidates[0]?.text || "No text available in response.";
+      
       console.log("Processed Response Text:", responseText);
 
+      // Update chat history
       addHistory("User", prompt);
       addHistory("Bot", responseText);
 
@@ -45,9 +60,9 @@ const generateResponse = async (prompt) => {
     }
   } catch (error) {
     console.error("Error in generateResponse:", error);
-    throw error;
+    return "An error occurred while generating a response. Please try again.";
   }
 };
 
-
+// Export the response generator and chat history
 export { generateResponse, chatHistory };

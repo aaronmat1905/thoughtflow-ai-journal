@@ -1,5 +1,6 @@
 import React from "react"; 
 import ReactDOM from "react-dom"; 
+import {ProfileCard} from "../Components/profilecard";
 
 export const HomePage = ()=>{
     return (
@@ -17,9 +18,7 @@ export const HomePage = ()=>{
             </header> */}
             <main class="p-4 flex space-x-4">
                 <section class="bg-gray-800 p-4 rounded-lg w-1/3">
-                    <img src="https://placehold.co/100x100" alt="User profile picture" class="rounded-full mx-auto"/>
-                    <h2 class="text-center mt-2">@username</h2>
-                    <p class="text-center">Welcome!</p>
+                    <ProfileCard username = "aaronmat1905" source = "https://avatars.githubusercontent.com/u/159543174?v=4"/>
                     <p class="text-center">WHAT'S ON YOUR MIND?</p>
                     <input type="text" class="w-full p-2 mt-2 bg-gray-700 rounded" placeholder="Text box"/>
                     <button class="w-full bg-purple-600 p-2 mt-2 rounded">Chat with AI now</button>
