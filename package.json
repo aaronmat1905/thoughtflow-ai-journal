@@ -1,0 +1,27 @@
+{
+  "name": "mernjournal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start123": "nodemon backend/server.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.10.3",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@google/generative-ai": "^0.21.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "framer-motion": "^11.11.13",
+    "mongoose": "^8.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
