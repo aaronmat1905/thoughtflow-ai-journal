@@ -4,7 +4,7 @@ import {ProfileCard} from "../Components/profilecard";
 
 const img = "https://avatars.githubusercontent.com/u/159543174?v=4"
 
-export const ProfilePage = ()=>{
+const ProfilePage = ()=>{
     return(
         <div>
             <p>Your Profile!</p>
@@ -12,3 +12,5 @@ export const ProfilePage = ()=>{
         </div>
     )
 }
+
+export default ProfilePage; 

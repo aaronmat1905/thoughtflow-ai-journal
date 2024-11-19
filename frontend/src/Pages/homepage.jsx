@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom"; 
 import {ProfileCard} from "../Components/profilecard";
 
-export const HomePage = ()=>{
+const HomePage = ()=>{
     return (
         <div>
             {/* <header class="bg-purple-600 p-4 flex justify-between items-center">
@@ -50,5 +50,4 @@ export const HomePage = ()=>{
     );
 }
 
-
-    
+export default HomePage; 

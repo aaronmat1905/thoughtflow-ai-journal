@@ -7,6 +7,8 @@ import path from "path";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes.js";
+import { generateResponse } from './chat.js';
+import chatbotRoutes from './routes/chatbot.routes.js';
 
 dotenv.config();
 const __dirname = path.resolve();
@@ -20,6 +22,7 @@ app.use(express.json());
 app.use("/api/userposts", Postroutes);
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
+app.use('/api', chatbotRoutes);
 
 // Serve frontend in production
 if(process.env.NODE_ENV === "production") {

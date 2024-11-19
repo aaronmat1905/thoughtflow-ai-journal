@@ -1,6 +1,4 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import dotenv from "dotenv";
-dotenv.config(); 
 API_KEY = process.env.GeminiAPI;
 if (!API_KEY) {
   throw new Error("API key not found. Please set the GeminiAPI environment variable.");

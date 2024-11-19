@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { generateResponse, chatHistory } from "../../../backend/chat";
 import "./chatpage.css";
 
-export const ChatUI = () => {
+const ChatUI = () => {
   const [input, setInput] = useState(""); // State for user input
   const [history, setHistory] = useState([]); // State for chat history
 
@@ -18,34 +18,35 @@ export const ChatUI = () => {
 
   // Handle sending messages
   const sendMessage = async () => {
-    if (!input.trim()) return; // Skip empty inputs
+    if (!input.trim()) return;
   
     try {
-      // Call the backend function to generate a response
-      const botResponse = await generateResponse(input);
-      console.log("Raw Bot Response:", botResponse); // Debugging to see the full response
+      const response = await fetch('/api/chatbot', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: input }),
+      });
   
-      // Ensure botResponse is a string or fallback message
-      const responseText = typeof botResponse === 'string' ? botResponse : "No response text available.";
+      const data = await response.json();
+      const botResponse = data.response || "No response text available.";
   
-      // Update chat history with the user and bot messages
       setHistory((prevHistory) => [
         ...prevHistory,
         { sender: "User", content: input },
-        { sender: "Bot", content: responseText },
+        { sender: "Bot", content: botResponse },
       ]);
   
-      setInput(""); // Clear the input field after sending the message
+      setInput("");
     } catch (error) {
-      console.error("Error in sendMessage:", error); // Debugging error messages
-  
-      // Update chat history with an error message
+      console.error("Error in sendMessage:", error);
       setHistory((prevHistory) => [
         ...prevHistory,
         { sender: "Error", content: "Failed to fetch a response. Please try again." },
       ]);
     }
-  }; 
+  };
 
   return (
     <div className="container">
@@ -80,3 +81,5 @@ export const ChatUI = () => {
     </div>
   );
 };
+
+export default ChatUI;
