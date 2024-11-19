@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 export function AboutPage(){
     return(
         <div>
-            {/* Write a small essay about our project */}
+            <p>This is all about <strong>Thoughtflow AI</strong>, your personalized AI-journal and coach. We are Aman, Aaron and Pranav</p>
         </div>
     ); 
 }

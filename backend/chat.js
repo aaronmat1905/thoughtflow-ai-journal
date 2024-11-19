@@ -1,22 +1,13 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
-
-// Load environment variables
-// dotenv.config();
-
-// Retrieve API key securely
 dotenv.config(); 
-API_KEY = process.env.GeminiAPI; 
-
-const API_KEY = "XXXXXXX";
+API_KEY = process.env.GeminiAPI;
 if (!API_KEY) {
   throw new Error("API key not found. Please set the GeminiAPI environment variable.");
 }
 
-// Initialize Google Generative AI
 const googleAI = new GoogleGenerativeAI(API_KEY);
 
-// Configuration for the model
 const geminiConfig = {
   temperature: 0.9,
   topP: 1,
@@ -24,21 +15,19 @@ const geminiConfig = {
   maxOutputTokens: 4096,
 };
 
-// Get the generative model
+
 const geminiModel = googleAI.getGenerativeModel({
   model: "gemini-1.5-flash",
-  ...geminiConfig, // Spread the config into the model configuration
+  ...geminiConfig,
 });
 
 // Chat history
 let chatHistory = [];
 
-// Add a message to the chat history
 const addHistory = (sender, content) => {
   chatHistory.push({ sender, content });
 };
 
-// Generate a response using the generative model
 const generateResponse = async (prompt) => {
   try {
     const result = await geminiModel.generateContent(prompt);
@@ -67,5 +56,4 @@ const generateResponse = async (prompt) => {
   }
 };
 
-// Export the response generator and chat history
 export { generateResponse, chatHistory };

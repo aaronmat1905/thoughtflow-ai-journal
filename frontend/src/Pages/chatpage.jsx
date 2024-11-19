@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { generateResponse, chatHistory } from "C:/Users/Aaron/Documents/Aaron's Work - Volume 1/MERNjournal/thoughtflow-journal-ai1/backend/chat.js";
+import { generateResponse, chatHistory } from "../../../backend/chat";
 import "./chatpage.css";
 
 export const ChatUI = () => {

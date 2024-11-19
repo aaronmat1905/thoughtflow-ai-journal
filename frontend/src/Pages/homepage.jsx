@@ -33,9 +33,9 @@ export const HomePage = ()=>{
                     <div class="mt-4">
                         <h3 class="bg-purple-600 p-2 rounded-t-lg">Your posts</h3>
                         <ul class="bg-gray-700 p-2 rounded-b-lg space-y-2">
-                            <li class="bg-gray-600 p-2 rounded">Team Handbook</li>
-                            <li class="bg-gray-600 p-2 rounded">Annual Report</li>
-                            <li class="bg-gray-600 p-2 rounded">Project Reports</li>
+                            <li class="bg-gray-600 p-2 rounded">Post1</li>
+                            <li class="bg-gray-600 p-2 rounded">Post2</li>
+                            <li class="bg-gray-600 p-2 rounded">Post3</li>
                         </ul>
                         <button class="w-full bg-gray-600 p-2 mt-2 rounded">Add New Post</button>
                     </div>
