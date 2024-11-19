@@ -8,7 +8,7 @@ import cors from 'cors';
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes.js";
 import { generateResponse } from './chat.js';
-import chatbotRoutes from './routes/chatbot.routes.js';
+import chatbotRoutes from './routes/chat.routes.js';
 
 dotenv.config();
 const __dirname = path.resolve();
