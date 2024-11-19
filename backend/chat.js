@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 dotenv.config(); 
 API_KEY = process.env.GeminiAPI; 
 
+const API_KEY = "XXXXXXX";
 if (!API_KEY) {
   throw new Error("API key not found. Please set the GeminiAPI environment variable.");
 }
