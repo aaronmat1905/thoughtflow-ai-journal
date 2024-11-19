@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start123": "nodemon backend/server.js"
+    "dev":"NODE_ENV = development nodemon backend/server.js", 
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "NODE_ENV = production node backend/server.js"
   },
   "type": "module",
   "keywords": [],
@@ -11,10 +13,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@chakra-ui/icons": "^2.1.1",
-    "@chakra-ui/react": "^2.10.3",
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
     "@google/generative-ai": "^0.21.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
