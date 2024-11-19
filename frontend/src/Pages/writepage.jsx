@@ -154,55 +154,6 @@ export function WritePost() {
           {editMode ? "Update Post" : "Submit Post"}
         </button>
       </form>
-
-      {/* Display existing posts */}
-      <div style={{ marginTop: "30px" }}>
-        <h2>Your Posts</h2>
-        {uposts.map((post) => (
-          <div
-            key={post._id}
-            style={{
-              border: "1px solid #ddd",
-              padding: "15px",
-              marginTop: "10px",
-              borderRadius: "5px",
-            }}
-          >
-            <h3>{post.title}</h3>
-            <p>{new Date(post.date).toLocaleDateString()}</p>
-            <p>{post.text}</p>
-            <div style={{ marginTop: "10px" }}>
-              <button
-                onClick={() => handleEdit(post)}
-                style={{
-                  marginRight: "10px",
-                  padding: "5px 10px",
-                  backgroundColor: "#28a745",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "3px",
-                  cursor: "pointer",
-                }}
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(post._id)}
-                style={{
-                  padding: "5px 10px",
-                  backgroundColor: "#dc3545",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "3px",
-                  cursor: "pointer",
-                }}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }

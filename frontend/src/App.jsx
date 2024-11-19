@@ -6,6 +6,7 @@ import ChatUI from './Pages/chatpage';
 import HomePage from './Pages/homepage';
 import ProfilePage from './Pages/profilepage';
 import Login from './Pages/login'; // Import the Login component
+import SearchPosts from "./Pages/searchposts"
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <NavBar />
       <Routes path="/" element={<Navigate to="/homepage" />} >
         <Route path="/write-post" element={<WritePost />} />
+        <Route path="/view-post" element={<SearchPosts/>} />
         <Route path="/chat" element={<ChatUI />} />
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />

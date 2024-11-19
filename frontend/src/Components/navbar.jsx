@@ -14,6 +14,9 @@ export const NavBar = () => {
           <Link to="/write-post" className="nav-link">Write Post</Link>
         </li>
         <li className="nav-item">
+          <Link to="/view-post" className="nav-link">View Posts</Link>
+        </li>
+        <li className="nav-item">
           <Link to="/chat" className="nav-link">ChatAI</Link>
         </li>
         <li className="nav-item">

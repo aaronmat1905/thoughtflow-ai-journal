@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "dev": "set NODE_ENV=development && nodemon backend/server.js",
-  "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
-  "start": "set NODE_ENV=production && node backend/server.js"
-},
+    "dev": "set NODE_ENV=development && nodemon backend/server.js",
+    "dev:all": "concurrently \"npm run dev\" \"cd frontend && npm run dev\"",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "set NODE_ENV=production && node backend/server.js"
+  },
   "type": "module",
   "keywords": [],
   "author": "",
@@ -26,6 +27,7 @@
     "mongoose": "^8.8.1"
   },
   "devDependencies": {
+    "concurrently": "^9.1.0",
     "nodemon": "^3.1.7"
   }
 }
