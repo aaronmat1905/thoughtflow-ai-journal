@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 // dotenv.config();
 
 // Retrieve API key securely
-const API_KEY = "AIzaSyBfZFLAvLbpe55fIpl9MdKzRdLzpi3z9rI";
+const API_KEY = "XXXXXXX";
 if (!API_KEY) {
   throw new Error("API key not found. Please set the GeminiAPI environment variable.");
 }
