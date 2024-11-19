@@ -1,25 +1,34 @@
 import express from "express"; 
 import mongoose from "mongoose"; 
-import product from "../models/upost_model.js";
+import UPost from "../models/upost_model.js";
 
 export const getPost = async (req, res) => {
     try {
-        const posts = await UPost.find({});
+        const posts = await UPost.find({}).sort({ date: -1 });
         res.status(200).json({ success: true, data: posts });
     } catch (error) {
-        console.error("Error fetching products:", error.message);
+        console.error("Error fetching posts:", error.message);
         res.status(500).json({ success: false, message: "Server error" });
     }
 };
 
 export const createPost = async (req, res) => {
-    const userPost = req.body;
-    if (!userPost.title || !userPost.text) {
-        return res.status(400).json({ success: false, message: "Please provide all fields" });
-    }
-
-    const newPost = new UPost(userPost);
     try {
+        const { title, date, text } = req.body;
+        
+        if (!title || !date || !text) {
+            return res.status(400).json({ 
+                success: false, 
+                message: "Please provide all fields" 
+            });
+        }
+
+        const newPost = new UPost({
+            title,
+            date: new Date(date),
+            text
+        });
+
         await newPost.save();
         res.status(201).json({ success: true, data: newPost });
     } catch (error) {
@@ -28,10 +37,10 @@ export const createPost = async (req, res) => {
     }
 };
 
-export const delPostID =  async (req, res) => {
+export const delPostID = async (req, res) => {
     const { id } = req.params;
     if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({success:true, data:updatedProduct});
+        return res.status(404).json({ success: false, message: "Invalid ID" });
     }
     try {
         const post = await UPost.findByIdAndDelete(id);
@@ -45,17 +54,32 @@ export const delPostID =  async (req, res) => {
     }
 }; 
 
-export const updatePost =  async (req, res)=>{
-    const {id} = req.params; 
-    const uPost = req.body; 
+export const updatePost = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, date, text } = req.body;
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({success:true, data:updatedProduct});
-    }
-    try{
-        const updatedPost = await UPost.findByIdAndUpdate(id, UPost, {new:true}); //pdt after update
-        res.status(200).json({success: true, data:updatedProduct}); 
-    }catch(error){
-        res.status(500).json({success:false, message:"server error"})
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(404).json({ success: false, message: "Invalid ID" });
+        }
+
+        const updatedPost = await UPost.findByIdAndUpdate(
+            id,
+            { 
+                title,
+                date: new Date(date),
+                text
+            },
+            { new: true }
+        );
+
+        if (!updatedPost) {
+            return res.status(404).json({ success: false, message: "Post not found" });
+        }
+
+        res.status(200).json({ success: true, data: updatedPost });
+    } catch (error) {
+        console.error("Error updating post:", error.message);
+        res.status(500).json({ success: false, message: "Server Error" });
     }
 };

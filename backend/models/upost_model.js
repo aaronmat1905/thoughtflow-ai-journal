@@ -1,18 +1,22 @@
 import mongoose from 'mongoose'; 
 
 const postSchema = new mongoose.Schema({
-    title:{
-        type:String, 
-        required:true 
-    }, 
-    text:{
+    title: {
         type: String, 
-        required:true
+        required: true 
+    }, 
+    date: {
+        type: Date,
+        required: true
+    },
+    text: {
+        type: String, 
+        required: true
     }
 }, {
-    timestamps:true // createdAt, updatedAt
+    timestamps: true
 }); 
 
-const UPost = mongoose.model('userpost', postSchema); // Create a model or a collection called "Post", and each Post should follow the schema
+const UPost = mongoose.model('userpost', postSchema);
 
 export default UPost; 
