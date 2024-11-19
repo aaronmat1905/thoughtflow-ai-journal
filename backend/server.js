@@ -22,7 +22,7 @@ app.use(express.json());
 app.use("/api/userposts", Postroutes);
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
-app.use('/api', chatbotRoutes);
+app.use('/api/chat', chatbotRoutes);
 
 // Serve frontend in production
 if(process.env.NODE_ENV === "production") {

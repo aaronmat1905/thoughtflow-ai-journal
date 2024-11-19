@@ -1,10 +1,6 @@
-import express from 'express';
-import { generateResponse } from '../chat';
+import { generateResponse } from "../chat.js"; 
 
-const router = express.Router();
-
-// Function to handle chat requests
-async function handleChatRequest(req, res) {
+export const handleChatRequest = async (req, res) => {
   const { prompt } = req.body;
   try {
     const response = await generateResponse(prompt);
@@ -12,9 +8,4 @@ async function handleChatRequest(req, res) {
   } catch (error) {
     res.status(500).json({ error: 'Failed to generate response' });
   }
-}
-
-// Route to handle chat requests
-router.post('/chat', handleChatRequest);
-
-export default router;
+};

@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-API_KEY = process.env.GeminiAPI;
+const API_KEY = process.env.GeminiAPI;
 if (!API_KEY) {
   throw new Error("API key not found. Please set the GeminiAPI environment variable.");
 }
