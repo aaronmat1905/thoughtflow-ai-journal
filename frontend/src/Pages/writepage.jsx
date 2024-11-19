@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDiary } from "../diary";
+import "../app.css";
 
 export function WritePost() {
   const [newPost, setNewPost] = useState({

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { generateResponse, chatHistory } from "../../../backend/chat";
-import "./chatpage.css";
+import "../app.css";
 
 const ChatUI = () => {
   const [input, setInput] = useState(""); // State for user input
@@ -21,7 +21,7 @@ const ChatUI = () => {
     if (!input.trim()) return;
   
     try {
-      const response = await fetch('/api/chatbot', {
+      const response = await fetch('/api/chat/chatbot', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

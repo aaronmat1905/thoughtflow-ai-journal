@@ -1,32 +1,32 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-const API_KEY = process.env.GeminiAPI;
-if (!API_KEY) {
-  throw new Error("API key not found. Please set the GeminiAPI environment variable.");
-}
-
-const googleAI = new GoogleGenerativeAI(API_KEY);
-
-const geminiConfig = {
-  temperature: 0.9,
-  topP: 1,
-  topK: 1,
-  maxOutputTokens: 4096,
-};
-
-
-const geminiModel = googleAI.getGenerativeModel({
-  model: "gemini-1.5-flash",
-  ...geminiConfig,
-});
 
 // Chat history
 let chatHistory = [];
 
-const addHistory = (sender, content) => {
-  chatHistory.push({ sender, content });
-};
 
 const generateResponse = async (prompt) => {
+  const API_KEY = process.env.GeminiAPI;
+  const googleAI = new GoogleGenerativeAI(API_KEY);
+  if (!API_KEY) {
+    throw new Error("API key not found. Please set the GeminiAPI environment variable.");
+  }
+
+  const geminiConfig = {
+    temperature: 0.9,
+    topP: 1,
+    topK: 1,
+    maxOutputTokens: 4096,
+  };
+
+
+  const geminiModel = googleAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+    ...geminiConfig,
+  });
+
+  const addHistory = (sender, content) => {
+    chatHistory.push({ sender, content });
+  };
   try {
     const result = await geminiModel.generateContent(prompt);
 

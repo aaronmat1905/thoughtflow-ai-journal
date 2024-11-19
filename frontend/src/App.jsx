@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import NavBar from './Components/navbar';
 import WritePost from './Pages/writepage';
 import ChatUI from './Pages/chatpage';
@@ -11,7 +11,7 @@ const App = () => {
   return (
     <Router>
       <NavBar />
-      <Routes>
+      <Routes path="/" element={<Navigate to="/homepage" />} >
         <Route path="/write-post" element={<WritePost />} />
         <Route path="/chat" element={<ChatUI />} />
         <Route path="/homepage" element={<HomePage />} />
