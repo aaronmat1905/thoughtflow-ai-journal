@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDiary } from "../diary";
-import { useHistory } from "react-router-dom"; // Importing useHistory to navigate
+import { useNavigate } from 'react-router-dom'; // Correct import
 
 export function PostCard({ post }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { deletePost } = useDiary(); // Importing deletePost from useDiary
-    const history = useHistory(); // Hook to navigate to WritePost page
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -26,7 +26,7 @@ export function PostCard({ post }) {
 
     const handleEdit = (e) => {
         e.stopPropagation(); // Prevent modal from opening
-        history.push(`/writepage/${post._id}`); // Navigate to the WritePost page for editing
+        navigate(`/writepage/${post._id}`); // Use navigate to redirect to the write page
     };
 
     return (
