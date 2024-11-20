@@ -8,10 +8,10 @@ const generateResponse = async (userInput) => {
   };
 
   const geminiModel = googleAI.getGenerativeModel({
-    model: "gemini-1,5-flash",
+    model: "gemini-pro",
     geminiConfig,
   });
-
+//gemini-1.5-flash
   try {
     const promptTemplate = `You are a mental health assistant. 
   :User  ${userInput}

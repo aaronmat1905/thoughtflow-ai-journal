@@ -1,35 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { generateResponse } from "../../../backend/chat"; // Assuming this is correct
+import React, { useState } from "react";
 
 const ChatUI = () => {
-  const [input, setInput] = useState(""); // State for user input
-  const [history, setHistory] = useState([]); // State for chat history
+  const [input, setInput] = useState(""); 
+  const [history, setHistory] = useState([]); 
 
-  // Function to refresh chat history
-  const refreshChatHistory = () => {
-    setHistory([...history]); // This might not be necessary; adjust as needed
-  };
-
-  // Handle sending messages
   const sendMessage = async () => {
     if (!input.trim()) return;
 
     try {
-      const response = await fetch('/api/chat/chatbot', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userInput: input }), // Ensure this matches your API
+        body: JSON.stringify({ sender: "User", content: input }),
       });
 
       const data = await response.json();
       const botResponse = data.response || "No response text available.";
-      
-      // Update chat history with user input and bot response
+
       setHistory((prevHistory) => [
         ...prevHistory,
-        { sender: "User ", content: input },
+        { sender: "User", content: input },
         { sender: "Bot", content: botResponse },
       ]);
 
@@ -53,7 +45,7 @@ const ChatUI = () => {
           </div>
         ))}
       </div>
-
+  
       {/* Input field and send button */}
       <div>
         <input
@@ -72,6 +64,7 @@ const ChatUI = () => {
       </div>
     </div>
   );
+  
 };
 
 export default ChatUI;

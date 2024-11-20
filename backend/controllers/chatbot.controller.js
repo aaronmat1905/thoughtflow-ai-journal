@@ -4,18 +4,18 @@ import { generateResponse } from '../chat.js';
 const chatHistory = [];
 
 export const handleChatRequest = async (req, res) => {
-  const { userInput } = req.body; // Expecting user input from request body
+  const { sender, content } = req.body; // Expecting 'sender' and 'content' keys
 
-  if (!userInput || typeof userInput !== 'string') {
+  if (!content || typeof content !== 'string') {
     return res.status(400).json({ error: 'Invalid input. Please provide a valid string.' });
   }
 
   try {
     const apiKey = process.env.API_KEY; // Get the API key from environment variables
-    const responseText = await generateResponse(userInput, apiKey);
-    
+    const responseText = await generateResponse(content, apiKey);
+
     // Add user input and bot response to chat history
-    chatHistory.push({ sender: 'User ', content: userInput });
+    chatHistory.push({ sender, content });
     chatHistory.push({ sender: 'Bot', content: responseText });
 
     // Return chat history along with the latest response
