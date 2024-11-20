@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDiary } from "./diary";
+import { useDiary } from "../diary";
 import { useHistory } from "react-router-dom"; // Importing useHistory to navigate
 
 export function PostCard({ post }) {
