@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDiary } from "../diary";
-import { useNavigate } from 'react-router-dom'; // Correct import
 
 export function PostCard({ post }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { deletePost } = useDiary(); // Importing deletePost from useDiary
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();  // Use useNavigate here inside the functional component
+    const { deletePost } = useDiary(); // Destructure deletePost from useDiary
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -15,18 +15,31 @@ export function PostCard({ post }) {
         setIsModalOpen(false);
     };
 
-    const handleDelete = async () => {
-        const { success, message } = await deletePost(post._id); // Using post's id to delete
+    const handleEdit = (e) => {
+        e.stopPropagation(); // Prevent modal from opening
+
+        // Redirect to the write page with the post data
+        navigate("/write-post", {
+            state: {
+                editMode: true,
+                postId: post._id,  // Pass the post ID
+                postData: {
+                    title: post.title,
+                    date: post.date,
+                    text: post.text,
+                },
+            },
+        });
+    };
+
+    const handleDelete = async (e) => {
+        e.stopPropagation(); // Prevent modal from opening
+        const { success, message } = await deletePost(post._id); // Pass post ID to delete it
         if (success) {
-            alert('Post deleted successfully');
+            alert("Post deleted successfully");
         } else {
             alert(`Error: ${message}`);
         }
-    };
-
-    const handleEdit = (e) => {
-        e.stopPropagation(); // Prevent modal from opening
-        navigate(`/writepage/${post._id}`); // Use navigate to redirect to the write page
     };
 
     return (
@@ -73,11 +86,9 @@ export function PostCard({ post }) {
                 >
                     {post.text}
                 </p>
-
-                {/* Edit Button */}
+                {/* Edit button */}
                 <button
                     onClick={handleEdit}
-                    className="edit-button"
                     style={{
                         backgroundColor: '#4CAF50',
                         color: 'white',
@@ -90,11 +101,9 @@ export function PostCard({ post }) {
                 >
                     Edit
                 </button>
-
-                {/* Delete Button */}
+                {/* Delete button */}
                 <button
                     onClick={handleDelete}
-                    className="delete-button"
                     style={{
                         backgroundColor: '#f44336',
                         color: 'white',
