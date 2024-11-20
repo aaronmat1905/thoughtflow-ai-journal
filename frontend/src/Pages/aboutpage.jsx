@@ -2,7 +2,7 @@
 import React from "react"; 
 import ReactDOM from "react-dom"; 
 
-export function AboutPage(){
+export default function AboutPage(){
     return(
         <div>
             <p>This is all about <strong>Thoughtflow AI</strong>, your personalized AI-journal and coach. We are Aman, Aaron and Pranav</p>
