@@ -1,11 +1,25 @@
-// Someone write a great essay about out project and add two words about each of the team members:
-import React from "react"; 
-import ReactDOM from "react-dom"; 
+import React from "react";
+import ContentCard from "../Components/ContentCard";
 
-export default function AboutPage(){
-    return(
-        <div>
-            <p>This is all about <strong>Thoughtflow AI</strong>, your personalized AI-journal and coach. We are Aman, Aaron and Pranav</p>
+export default function AboutPage() {
+    return (
+        <div className="container">
+            <ContentCard 
+                title="About Thoughtflow AI"
+                content={
+                    <div>
+                        <p>Your personalized AI-journal and coach</p>
+                        <div className="team-members">
+                            <h4>Our Team:</h4>
+                            <ul>
+                                <li>Aman - Lead Developer</li>
+                                <li>Aaron - AI Specialist</li>
+                                <li>Pranav - UX Designer</li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+            />
         </div>
-    ); 
+    );
 }

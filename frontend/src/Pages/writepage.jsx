@@ -1,161 +1,82 @@
 import React, { useState, useEffect } from "react";
 import { useDiary } from "../diary";
-import "../app.css";
 
 export function WritePost() {
-  const [newPost, setNewPost] = useState({
-    title: "",
-    date: "",
-    text: "",
-  });
-  const [editMode, setEditMode] = useState(false);
-  const [editId, setEditId] = useState(null);
+    const [newPost, setNewPost] = useState({ title: "", date: "", text: "" });
+    const [editMode, setEditMode] = useState(false);
+    const [editId, setEditId] = useState(null);
+    const { createPosts, fetchPosts, deletePost, updatePost } = useDiary();
 
-  // Get functions and state from Zustand store
-  const { 
-    uposts, 
-    createPosts, 
-    fetchPosts, 
-    deletePost, 
-    updatePost 
-  } = useDiary();
+    useEffect(() => {
+        fetchPosts();
+    }, []);
 
-  // Fetch posts on component mount
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { success, message } = editMode 
+            ? await updatePost(editId, newPost)
+            : await createPosts(newPost);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewPost({
-      ...newPost,
-      [name]: value,
-    });
-  };
+        if (success) {
+            alert(`Success: ${message}`);
+            setNewPost({ title: "", date: "", text: "" });
+            setEditMode(false);
+            setEditId(null);
+        } else {
+            alert(`Error: ${message}`);
+        }
+    };
 
-  const handleAddPost = async (e) => {
-    e.preventDefault();
-    const { success, message } = await createPosts(newPost);
+    return (
+        <div className='container mx-auto p-4 max-w-2xl'>
+            <div className='card-base'>
+                <h1 className='text-2xl font-semibold text-center mb-6'>
+                    {editMode ? "Edit Journal Entry" : "New Journal Entry"}
+                </h1>
 
-    if (success) {
-      alert(`Success: ${message}`);
-      setNewPost({ title: "", date: "", text: "" });
-    } else {
-      alert(`Error: ${message}`);
-    }
-  };
+                <form onSubmit={handleSubmit} className='space-y-4'>
+                    <div className='form-group'>
+                        <label className='block text-gray-700 mb-2'>Title</label>
+                        <input
+                            type="text"
+                            className='input-field'
+                            value={newPost.title}
+                            onChange={(e) => setNewPost({...newPost, title: e.target.value})}
+                            required
+                        />
+                    </div>
 
-  const handleDelete = async (id) => {
-    const { success, message } = await deletePost(id);
-    if (success) {
-      alert(`Success: ${message}`);
-    } else {
-      alert(`Error: ${message}`);
-    }
-  };
+                    <div className='form-group'>
+                        <label className='block text-gray-700 mb-2'>Date</label>
+                        <input
+                            type="date"
+                            className='input-field'
+                            value={newPost.date}
+                            onChange={(e) => setNewPost({...newPost, date: e.target.value})}
+                            required
+                        />
+                    </div>
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    const { success, message } = await updatePost(editId, newPost);
-    
-    if (success) {
-      alert(`Success: ${message}`);
-      setNewPost({ title: "", date: "", text: "" });
-      setEditMode(false);
-      setEditId(null);
-    } else {
-      alert(`Error: ${message}`);
-    }
-  };
+                    <div className='form-group'>
+                        <label className='block text-gray-700 mb-2'>Content</label>
+                        <textarea
+                            className='input-field min-h-[200px]'
+                            value={newPost.text}
+                            onChange={(e) => setNewPost({...newPost, text: e.target.value})}
+                            required
+                        />
+                    </div>
 
-  const handleEdit = (post) => {
-    setEditMode(true);
-    setEditId(post._id);
-    setNewPost({
-      title: post.title,
-      date: post.date,
-      text: post.text,
-    });
-  };
-
-  return (
-    <div style={{ margin: "0 auto", maxWidth: "800px", padding: "20px" }}>
-      <h1 style={{ textAlign: "center", marginBottom: "20px" }}>
-        {editMode ? "Edit Post" : "Write a Post"}
-      </h1>
-      
-      <form onSubmit={editMode ? handleUpdate : handleAddPost}>
-        <div style={{ marginBottom: "15px" }}>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={newPost.title}
-            onChange={handleChange}
-            style={{
-              width: "100%",
-              padding: "10px",
-              border: "1px solid #ccc",
-              borderRadius: "5px",
-            }}
-            required
-          />
+                    <button 
+                        type="submit"
+                        className={`button w-full ${editMode ? 'bg-green-500' : ''}`}
+                    >
+                        {editMode ? "Update Entry" : "Create Entry"}
+                    </button>
+                </form>
+            </div>
         </div>
-
-        <div style={{ marginBottom: "15px" }}>
-          <label htmlFor="date">Date:</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            value={newPost.date}
-            onChange={handleChange}
-            style={{
-              width: "100%",
-              padding: "10px",
-              border: "1px solid #ccc",
-              borderRadius: "5px",
-            }}
-            required
-          />
-        </div>
-
-        <div style={{ marginBottom: "15px" }}>
-          <label htmlFor="text">Content:</label>
-          <textarea
-            id="text"
-            name="text"
-            rows="5"
-            value={newPost.text}
-            onChange={handleChange}
-            style={{
-              width: "100%",
-              padding: "10px",
-              border: "1px solid #ccc",
-              borderRadius: "5px",
-            }}
-            required
-          />
-        </div>
-
-        <button
-          type="submit"
-          style={{
-            width: "100%",
-            padding: "10px",
-            backgroundColor: editMode ? "#28a745" : "#007BFF",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          {editMode ? "Update Post" : "Submit Post"}
-        </button>
-      </form>
-    </div>
-  );
+    );
 }
 
 export default WritePost;

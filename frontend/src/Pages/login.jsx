@@ -3,64 +3,70 @@ import { Link } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
 
 const Login = () => {
-	const [username, setUsername] = useState("");
-	const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const { loading, login } = useLogin();
 
-	const { loading, login } = useLogin();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await login(username, password);
+    };
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		await login(username, password);
-	};
+    return (
+        <div className='flex flex-col items-center justify-center min-h-screen p-4'>
+            <div className='card-base w-full max-w-md'>
+                <div className='text-center mb-6'>
+                    <h1 className='text-3xl font-semibold text-gray-300'>
+                        Welcome to <span className='text-blue-500'>Thoughtflow</span>
+                    </h1>
+                    <p className='text-gray-400 mt-2'>Your personal AI Journal</p>
+                </div>
 
-	return (
-		<div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
-			<div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
-				<h1 className='text-3xl font-semibold text-center text-gray-300'>
-					Login
-					<span className='text-blue-500'>Thoughtflow</span>
-				</h1>
-				<h3>Your personal AI Journal</h3>
+                <form onSubmit={handleSubmit} className='space-y-4'>
+                    <div className='form-group'>
+                        <label className='block text-gray-300 mb-2'>Username</label>
+                        <input
+                            type="text"
+                            className='input-field'
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            autoComplete="username"
+                            placeholder="Enter username"
+                        />
+                    </div>
 
-				<form onSubmit={handleSubmit}>
-					<div>
-						<label className='label p-2'>
-							<span className='text-base label-text'>Username</span>
-						</label>
-						<input
-						type="text"
-						placeholder="Enter username"
-						className="w-full input input-bordered h-10"
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
-						autoComplete="username"  // Add this
-						/>
-					</div>
+                    <div className='form-group'>
+                        <label className='block text-gray-300 mb-2'>Password</label>
+                        <input
+                            type="password"
+                            className='input-field'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            autoComplete="current-password"
+                            placeholder="Enter password"
+                        />
+                    </div>
 
-					<div>
-						<label className='label'>
-							<span className='text-base label-text'>Password</span>
-						</label>
-						<input
-							type="password"
-							placeholder="Enter Password"
-							className="w-full input input-bordered h-10"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-							autoComplete="current-password"  // Add this
-						/>
-					</div>
-					<Link to='/signup' className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block'>
-						{"Don't"} have an account?
-					</Link>
-					<div>
-						<button className='btn btn-block btn-sm mt-2' disabled={loading}>
-							{loading ? <span className='loading loading-spinner '></span> : "Login"}
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	);
+                    <button 
+                        className='button w-full' 
+                        disabled={loading}
+                    >
+                        {loading ? (
+                            <span className='loading loading-spinner'></span>
+                        ) : (
+                            "Login"
+                        )}
+                    </button>
+
+                    <div className='text-center mt-4'>
+                        <Link to='/signup' className='text-blue-400 hover:text-blue-500'>
+                            Don't have an account? Sign up
+                        </Link>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
 };
+
 export default Login;

@@ -3,110 +3,109 @@ import { Link } from "react-router-dom";
 import useSignup from "../hooks/useSignup";
 
 const Signup = () => {
-	const [inputs, setInputs] = useState({
-		fullName: "",
-		username: "",
-		password: "",
-		confirmPassword: "",
-		gender: ""
-	});
+    const [inputs, setInputs] = useState({
+        fullName: "",
+        username: "",
+        password: "",
+        confirmPassword: "",
+        gender: ""
+    });
 
-	const { loading, signup } = useSignup();
+    const { loading, signup } = useSignup();
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		await signup(inputs);
-	};
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await signup(inputs);
+    };
 
-	return (
-		<div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
-			<div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
-				<h1 className='text-3xl font-semibold text-center text-gray-300'>
-					Sign Up
-					<span className='text-blue-500'> ChatApp</span>
-				</h1>
+    return (
+        <div className='flex flex-col items-center justify-center min-h-screen p-4'>
+            <div className='card-base w-full max-w-md'>
+                <div className='text-center mb-6'>
+                    <h1 className='text-3xl font-semibold text-gray-300'>
+                        Join <span className='text-blue-500'>Thoughtflow</span>
+                    </h1>
+                    <p className='text-gray-400 mt-2'>Create your AI journal account</p>
+                </div>
 
-				<form onSubmit={handleSubmit}>
-					<div>
-						<label className='label p-2'>
-							<span className='text-base label-text'>Full Name</span>
-						</label>
-						<input
-							type='text'
-							placeholder='John Doe'
-							className='w-full input input-bordered h-10'
-							value={inputs.fullName}
-							onChange={(e) => setInputs({...inputs, fullName: e.target.value})}
-						/>
-					</div>
+                <form onSubmit={handleSubmit} className='space-y-4'>
+                    <div className='form-group'>
+                        <label className='block text-gray-300 mb-2'>Full Name</label>
+                        <input
+                            type="text"
+                            className='input-field'
+                            placeholder="John Doe"
+                            value={inputs.fullName}
+                            onChange={(e) => setInputs({...inputs, fullName: e.target.value})}
+                        />
+                    </div>
 
-					<div>
-						<label className='label p-2'>
-							<span className='text-base label-text'>Username</span>
-						</label>
-						<input
-							type='text'
-							placeholder='johndoe'
-							className='w-full input input-bordered h-10'
-							value={inputs.username}
-							onChange={(e) => setInputs({...inputs, username: e.target.value})}
-						/>
-					</div>
+                    <div className='form-group'>
+                        <label className='block text-gray-300 mb-2'>Username</label>
+                        <input
+                            type="text"
+                            className='input-field'
+                            placeholder="johndoe"
+                            value={inputs.username}
+                            onChange={(e) => setInputs({...inputs, username: e.target.value})}
+                        />
+                    </div>
 
-					<div>
-						<label className='label'>
-							<span className='text-base label-text'>Password</span>
-						</label>
-						<input
-							type='password'
-							placeholder='Enter Password'
-							className='w-full input input-bordered h-10'
-							value={inputs.password}
-							onChange={(e) => setInputs({...inputs, password: e.target.value})}
-						/>
-					</div>
+                    <div className='form-group'>
+                        <label className='block text-gray-300 mb-2'>Password</label>
+                        <input
+                            type="password"
+                            className='input-field'
+                            placeholder="Minimum 6 characters"
+                            value={inputs.password}
+                            onChange={(e) => setInputs({...inputs, password: e.target.value})}
+                        />
+                    </div>
 
-					<div>
-						<label className='label'>
-							<span className='text-base label-text'>Confirm Password</span>
-						</label>
-						<input
-							type='password'
-							placeholder='Confirm Password'
-							className='w-full input input-bordered h-10'
-							value={inputs.confirmPassword}
-							onChange={(e) => setInputs({...inputs, confirmPassword: e.target.value})}
-						/>
-					</div>
+                    <div className='form-group'>
+                        <label className='block text-gray-300 mb-2'>Confirm Password</label>
+                        <input
+                            type="password"
+                            className='input-field'
+                            placeholder="Confirm your password"
+                            value={inputs.confirmPassword}
+                            onChange={(e) => setInputs({...inputs, confirmPassword: e.target.value})}
+                        />
+                    </div>
 
-					<div>
-						<label className='label'>
-							<span className='text-base label-text'>Gender</span>
-						</label>
-						<select 
-							className='w-full input input-bordered h-10'
-							value={inputs.gender}
-							onChange={(e) => setInputs({...inputs, gender: e.target.value})}
-						>
-							<option value=''>Select gender</option>
-							<option value='male'>Male</option>
-							<option value='female'>Female</option>
-						</select>
-					</div>
+                    <div className='form-group'>
+                        <label className='block text-gray-300 mb-2'>Gender</label>
+                        <select 
+                            className='input-field'
+                            value={inputs.gender}
+                            onChange={(e) => setInputs({...inputs, gender: e.target.value})}
+                        >
+                            <option value="">Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
 
-					<Link to='/login' className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block'>
-						Already have an account?
-					</Link>
+                    <button 
+                        className='button w-full' 
+                        disabled={loading}
+                    >
+                        {loading ? (
+                            <span className='loading loading-spinner'></span>
+                        ) : (
+                            "Create Account"
+                        )}
+                    </button>
 
-					<div>
-						<button className='btn btn-block btn-sm mt-2' disabled={loading}>
-							{loading ? <span className='loading loading-spinner'></span> : "Sign Up"}
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	);
+                    <div className='text-center mt-4'>
+                        <Link to='/login' className='text-blue-400 hover:text-blue-500'>
+                            Already have an account? Login
+                        </Link>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
 };
 
 export default Signup;
