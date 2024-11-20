@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
 
+
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -14,14 +15,11 @@ const Login = () => {
 
     return (
         <div className='flex flex-col items-center justify-center min-h-screen p-4'>
-            <div className='card-base w-full max-w-md'>
-                <div className='text-center mb-6'>
-                    <h1 className='text-3xl font-semibold text-gray-300'>
-                        Welcome to <span className='text-blue-500'>Thoughtflow</span>
-                    </h1>
-                    <p className='text-gray-400 mt-2'>Your personal AI Journal</p>
+            <div className='card-base w-full max-w-md text-center'>
+                <div className='logo-title mb-6'>
+                    <img src="./logo.jpeg"alt="Thoughtflow.ai Logo" className="logo" />
+                    <h1 className='text-3xl font-semibold text-gray-300'>Thoughtflow.ai</h1>
                 </div>
-
                 <form onSubmit={handleSubmit} className='space-y-4'>
                     <div className='form-group'>
                         <label className='block text-gray-300 mb-2'>Username</label>
@@ -47,10 +45,7 @@ const Login = () => {
                         />
                     </div>
 
-                    <button 
-                        className='button w-full' 
-                        disabled={loading}
-                    >
+                    <button className='button w-full' disabled={loading}>
                         {loading ? (
                             <span className='loading loading-spinner'></span>
                         ) : (
