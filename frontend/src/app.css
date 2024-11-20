@@ -199,6 +199,71 @@ button {
 button:hover {
     background-color: #218838;
 }
+/* Post Card Styles */
+.post-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.post-card h1 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.post-card h2 {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.post-card p {
+    line-height: 1.5;
+    color: #444;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Action Buttons */
+.post-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.action-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.action-button.edit {
+    background-color: #007bff;
+    color: white;
+}
+
+.action-button.edit:hover {
+    background-color: #0056b3;
+}
+
+.action-button.delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.action-button.delete:hover {
+    background-color: #a71d2a;
+}
 
 /* Footer Styles */
 footer {
