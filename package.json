@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "set NODE_ENV=development && nodemon backend/server.js",
-    "dev:all": "concurrently \"npm run dev\" \"cd frontend && npm run dev\"",
+    "dev:all": "concurrently \"cd backend &&  npm run dev\" \"cd frontend && npm run dev\"",
     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
     "start": "set NODE_ENV=production && node backend/server.js"
   },

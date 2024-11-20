@@ -10,7 +10,7 @@ import SearchPosts from "./Pages/searchposts"
 import AboutPage from "./Pages/aboutpage"; 
 import Signup from "./Pages/signup"; 
 import { AuthContextProvider } from './context/AuthContext';
-
+import "./app.css"
 const App = () => {
   return (
     <AuthContextProvider>
