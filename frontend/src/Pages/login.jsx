@@ -17,7 +17,6 @@ const Login = () => {
         <div className='flex flex-col items-center justify-center min-h-screen p-4'>
             <div className='card-base w-full max-w-md text-center'>
                 <div className='logo-title mb-6'>
-                    <img src="./logo.jpeg"alt="Thoughtflow.ai Logo" className="logo" />
                     <h1 className='text-3xl font-semibold text-gray-300'>Thoughtflow.ai</h1>
                 </div>
                 <form onSubmit={handleSubmit} className='space-y-4'>

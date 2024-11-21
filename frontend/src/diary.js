@@ -78,4 +78,35 @@ export const useDiary = create((set) => ({
       return { success: false, message: "Error deleting post" };
     }
   },
+
+  updatePost: async (id, updatedPost) => {
+    try {
+      const res = await fetch(`/api/userposts/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedPost),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Failed to update post. Status: ${res.status}`);
+      }
+
+      const data = await res.json();
+      if (data.success) {
+        set((state) => ({
+          uposts: state.uposts.map((post) =>
+            post._id === id ? data.data : post
+          ),
+        }));
+        return { success: true, message: "Post updated successfully" };
+      } else {
+        return { success: false, message: data.message };
+      }
+    } catch (error) {
+      console.error("Error updating post:", error);
+      return { success: false, message: "Error updating post" };
+    }
+  },
 }));

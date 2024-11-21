@@ -7,12 +7,15 @@ export const NavBar = () => {
     <nav className="navbar">
       <ul className="nav-list">
         <li className="nav-item logo-item">
-          <Link to="/" className="logo-link">
+          <Link to="/homepage" className="logo-link">
             <div className="logo-container">
               <img src={logo} alt="Logo" className="logo" />
             </div>
             <span className="logo-text">Thoughtflow.ai</span>
           </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/login" className="nav-link">Login</Link>
         </li>
         <li className="nav-item">
           <Link to="/homepage" className="nav-link">Home</Link>
@@ -32,9 +35,7 @@ export const NavBar = () => {
         <li className="nav-item">
           <Link to="/about" className="nav-link">About</Link>
         </li>
-        <li className="nav-item">
-          <Link to="/login" className="nav-link">Login</Link>
-        </li>
+        
       </ul>
     </nav>
   );

@@ -3,13 +3,14 @@ body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('background.png.png'); /* Your background image */
+    background-image: url('background.png.png'); 
     background-size: cover;
     background-position: center;
     color: #333;
     line-height: 1.6;
 }
 
+/* Content Card */
 .content-card {
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
@@ -48,61 +49,62 @@ body {
 .navbar {
     background-color: #333;
     padding: 10px 20px;
-  }
-  
-  .nav-list {
+}
+
+.nav-list {
     list-style-type: none;
     display: flex;
     align-items: center;
     margin: 0;
     padding: 0;
-  }
-  
-  .nav-item {
+}
+
+.nav-item {
     margin-right: 20px;
-  }
-  
-  .logo-item {
+}
+
+.logo-item {
     display: flex;
     align-items: center;
-  }
-  
-  .logo-link {
+}
+
+.logo-link {
     display: flex;
     align-items: center;
     color: white;
     text-decoration: none;
-  }
-  
-  .logo-container {
+}
+
+.logo-container {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     overflow: hidden;
     margin-right: 10px;
-  }
-  
-  .logo {
+}
+
+.logo {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-  
-  .logo-text {
+}
+
+.logo-text {
     font-size: 1.5em;
     font-weight: bold;
-  }
-  
-  .nav-link {
+}
+
+.nav-link {
     color: white;
     text-decoration: none;
     padding: 8px 16px;
     transition: background-color 0.3s;
-  }
-  
-  .nav-link:hover {
+}
+
+.nav-link:hover {
     background-color: #575757;
-  }
+}
+
 /* Chat UI Styles */
 .container {
     width: 50%;
@@ -205,7 +207,8 @@ label {
     margin: 10px 0 5px;
 }
 
-input, textarea {
+input,
+textarea {
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #dcdcdc;
@@ -226,6 +229,7 @@ button {
 button:hover {
     background-color: #218838;
 }
+
 /* Post Card Styles */
 .post-card {
     border: 1px solid #ddd;
@@ -304,6 +308,7 @@ footer {
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Additional Form Group Styles */
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -314,6 +319,7 @@ footer {
     font-weight: 500;
 }
 
+/* Card Base Styles */
 .card-base {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
@@ -323,6 +329,7 @@ footer {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Input Field Styles */
 .input-field {
     width: 100%;
     padding: 0.75rem;
@@ -339,9 +346,22 @@ footer {
     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
+/* Button Styles */
 .button {
     padding: 0.75rem 1.5rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
+}
+
+.button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
 }

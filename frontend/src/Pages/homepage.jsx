@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { ProfileCard } from "../Components/profilecard";
 import ContentCard from "../Components/ContentCard";
 import { useDiary } from "../diary"; 
+import { useNavigate } from "react-router-dom"; 
 
 const HomePage = () => {
     const { uposts, fetchPosts, createPosts } = useDiary();
     const [newPost, setNewPost] = useState({ title: "", date: "", text: "" });
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetchPosts(); // Fetch posts when the component mounts
+        fetchPosts();
     }, [fetchPosts]);
 
     const handleInputChange = (e) => {
@@ -45,7 +47,7 @@ const HomePage = () => {
                                     className="input-field" 
                                     placeholder="Text box"
                                 />
-                                <button className="button" onClick={handleCreatePost}>Chat with AI now</button>
+                                <button className="button" onClick={() => navigate("/chat")}>Chat with AI now</button>
                             </div>
                         }
                     />
@@ -87,6 +89,7 @@ const HomePage = () => {
                                     placeholder="Write your post..."
                                 />
                                 <button className="button" onClick={handleCreatePost}>Add New Post</button>
+                                <button className="button" onClick={() => navigate("/write-post")}>Go to Write Post</button>
                             </div>
                         }
                     />
