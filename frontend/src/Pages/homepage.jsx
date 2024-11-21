@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ProfileCard } from "../Components/profilecard";
 import ContentCard from "../Components/ContentCard";
+import { useDiary } from "../diary"; 
 
 const HomePage = () => {
+    const { uposts, fetchPosts, createPosts } = useDiary();
+    const [newPost, setNewPost] = useState({ title: "", date: "", text: "" });
+
+    useEffect(() => {
+        fetchPosts(); // Fetch posts when the component mounts
+    }, [fetchPosts]);
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewPost((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleCreatePost = async () => {
+        const result = await createPosts(newPost);
+        alert(result.message);
+        if (result.success) {
+            setNewPost({ title: "", date: "", text: "" }); // Clear the input fields
+        }
+    };
+
     return (
         <div className="container">
             <main className="flex-container">
@@ -18,37 +39,66 @@ const HomePage = () => {
                                 <p>WHAT'S ON YOUR MIND?</p>
                                 <input 
                                     type="text" 
+                                    name="text"
+                                    value={newPost.text}
+                                    onChange={handleInputChange}
                                     className="input-field" 
                                     placeholder="Text box"
                                 />
-                                <button className="button">Chat with AI now</button>
+                                <button className="button" onClick={handleCreatePost}>Chat with AI now</button>
                             </div>
                         }
                     />
                 </section>
-                
-                <section className="right-section">
-                    <ContentCard
-                        title="Mood Dashboard"
-                        content={
-                            <ul>
-                                <li>Mood Entry 1</li>
-                                <li>Mood Entry 2</li>
-                                <li>Mood Entry 3</li>
-                            </ul>
-                        }
-                    />
-                    
+                <section>
                     <ContentCard
                         title="Your Posts"
                         content={
                             <div>
                                 <ul className="posts-list">
-                                    <li>Post1</li>
-                                    <li>Post2</li>
-                                    <li>Post3</li>
+                                    {uposts.length > 0 ? (
+                                        uposts.map((post) => (
+                                            <li key={post._id}>{post.title}</li>
+                                        ))
+                                    ) : (
+                                        <li>No posts available</li>
+                                    )}
                                 </ul>
-                                <button className="button">Add New Post</button>
+                                <input 
+                                    type="text" 
+                                    name="title"
+                                    value={newPost.title}
+                                    onChange={handleInputChange}
+                                    className="input-field" 
+                                    placeholder="Post Title"
+                                />
+                                <input 
+                                    type="date" 
+                                    name="date"
+                                    value={newPost.date}
+                                    onChange={handleInputChange}
+                                    className="input-field" 
+                                />
+                                <textarea 
+                                    name="text"
+                                    value={newPost.text}
+                                    onChange={handleInputChange}
+                                    className="input-field" 
+                                    placeholder="Write your post..."
+                                />
+                                <button className="button" onClick={handleCreatePost}>Add New Post</button>
+                            </div>
+                        }
+                    />
+                </section>
+                <section>
+                    <ContentCard
+                        title="Motivational Messages"
+                        content={
+                            <div>
+                                <p>"Your mental health is a priority. Your happiness is essential. Your self-care is a necessity."</p>
+                                <p>"It's okay to not be okay. Just remember that you are not alone."</p>
+                                <p>"Believe you can and you're halfway there." - Theodore Roosevelt</p>
                             </div>
                         }
                     />

@@ -1,12 +1,19 @@
-// src/components/NavBar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import './navbar.css';
+import logo from './logo.jpeg'; // Import the logo image using ES modules
 
 export const NavBar = () => {
   return (
     <nav className="navbar">
       <ul className="nav-list">
+        <li className="nav-item logo-item">
+          <Link to="/" className="logo-link">
+            <div className="logo-container">
+              <img src={logo} alt="Logo" className="logo" />
+            </div>
+            <span className="logo-text">Thoughtflow.ai</span>
+          </Link>
+        </li>
         <li className="nav-item">
           <Link to="/homepage" className="nav-link">Home</Link>
         </li>

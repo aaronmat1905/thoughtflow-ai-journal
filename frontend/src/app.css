@@ -46,36 +46,63 @@ body {
 
 /* Navbar Styles */
 .navbar {
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent */
-    padding: 15px 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.nav-list {
+    background-color: #333;
+    padding: 10px 20px;
+  }
+  
+  .nav-list {
     list-style-type: none;
+    display: flex;
+    align-items: center;
     margin: 0;
     padding: 0;
+  }
+  
+  .nav-item {
+    margin-right: 20px;
+  }
+  
+  .logo-item {
     display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-.nav-item {
-    margin: 0 20px;
-}
-
-.nav-link {
-    color: #333; /* Dark text color for contrast */
+  }
+  
+  .logo-link {
+    display: flex;
+    align-items: center;
+    color: white;
     text-decoration: none;
+  }
+  
+  .logo-container {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+  
+  .logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .logo-text {
+    font-size: 1.5em;
     font-weight: bold;
-    transition: color 0.3s;
-}
-
-.nav-link:hover {
-    color: #3498db; /* Change on hover */
-    text-decoration: underline;
-}
-
+  }
+  
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-link:hover {
+    background-color: #575757;
+  }
 /* Chat UI Styles */
 .container {
     width: 50%;
